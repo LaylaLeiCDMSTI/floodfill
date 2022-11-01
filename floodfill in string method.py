@@ -33,26 +33,19 @@ def flood_fill(input_board: List[str], old: str, new: str, x: int, y: int) -> Li
     countlist = []
     if input_board[x][y] == old:
         input_board[x] = input_board[x].split("#")
-        print(input_board[x])
+        #print(input_board[x])
         if len(input_board[x]) !=1:
             for i in range(len(input_board[x])):
                 if input_board[x][i] != '':
                     countlist.append(i)
-            print(countlist)
+            #print(countlist)
             countlist.remove(countlist[0])
             countlist.remove(countlist[len(countlist)-1])
-            print(countlist)
+            #print(countlist)
             for n in countlist:
                 input_board[x][n] = new * len(input_board[x][n])
         input_board[x] = '#'.join(input_board[x])
-        #print(input_board)
-        #input_board[x] = input_board[x][:y] + new + input_board[x][y+1:]
         flood_fill(input_board=input_board, old=old, new=new, x=x-1, y=y)
-
-        #flood_fill(input_board=input_board, old=old, new=new, x=x, y=y+1)
-        
-        #flood_fill(input_board=input_board, old=old, new=new, x=x, y=y-1)
-
         flood_fill(input_board=input_board, old=old, new=new, x=x+1, y=y)
 
     return input_board
