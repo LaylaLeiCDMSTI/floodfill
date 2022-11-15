@@ -3,19 +3,14 @@ from operator import ne
 from tkinter import EW, N
 from typing import List
 
-board = [
-    "......................",
-    "......##########......",
-    "......#........#......",
-    "......#........#......",
-    "......#........#####..",
-    "....###............#..",
-    "....#............###..",
-    "....##############....",
-]
 
 
-def flood_fill(input_board: List[str], old: str, new: str, x: int, y: int) -> List[str]:
+def print_board(board):
+    for row in board:
+        print(''.join(row))
+
+
+def flood_fill(board: List[str], old: str, new: str, x: int, y: int) -> List[str]:
     """Returns board with old values replaced with new values
     through flood filling starting from the coordinates x, y
     Args:
@@ -27,27 +22,40 @@ def flood_fill(input_board: List[str], old: str, new: str, x: int, y: int) -> Li
     Returns:
         List[str]: Modified board
     """
-
+    #print_board(input_list)
     # Implement your code here.
-    input_list = []
-    for i in input_board:
-        input_list.append(list(i))
-    print(input_board)
-    if input_list[x][y] == old: 
-        input_list[x][y] = new 
+    if board[x][y] == old: 
+        board[x][y] = new 
         #recursively invoke flood fill on all surrounding cells:
-        if x > 0 and input_list[x-1][y] != '#':
-            flood_fill(input_list, old, new, x-1, y)
-        if y < len(input_list[x]) and input_list[x][y+1] != '#':
-            flood_fill(input_list, old, new, x, y+1)
-        if y > 0 and input_list[x][y-1] != '#':
-            flood_fill(input_list, old, new, x, y-1)
-        if x < len(input_list) and input_list[x+1][y] != '#':
-            flood_fill(input_list, old, new, x+1, y)
-  
-    return input_list
+        if x > 0 and board[x-1][y] != '#':
+            flood_fill(board, old, new, x-1, y)
+        if y < len(board[x]) and board[x][y+1] != '#':
+            flood_fill(board, old, new, x, y+1)
+        if y > 0 and board[x][y-1] != '#':
+            flood_fill(board, old, new, x, y-1)
+        if x < len(board) and board[x+1][y] != '#':
+            flood_fill(board, old, new, x+1, y)
 
-modified_board = flood_fill(input_board=board, old=".", new="~", x=5, y=12)
+
+def make_board(input):
+    board = []
+    for i in input:
+        board.append(list(i))
+    return board
+
+board1 = make_board([
+    "......................",
+    "......##########......",
+    "......#........#......",
+    "......#........#......",
+    "......#........#####..",
+    "....###............#..",
+    "....#............###..",
+    "....##############....",
+])
+
+flood_fill(board1, old=".", new="~", x=5, y=12)
+print_board(board1)
 
 
 #for a in modified_board:
