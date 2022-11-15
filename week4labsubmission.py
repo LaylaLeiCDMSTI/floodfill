@@ -29,11 +29,11 @@ def flood_fill(board: List[str], old: str, new: str, x: int, y: int) -> List[str
         #recursively invoke flood fill on all surrounding cells:
         if x > 0 and board[x-1][y] != '#':
             flood_fill(board, old, new, x-1, y)
-        if y < len(board[x]) and board[x][y+1] != '#':
+        if y < len(board[x])-1 and board[x][y+1] != '#':
             flood_fill(board, old, new, x, y+1)
         if y > 0 and board[x][y-1] != '#':
             flood_fill(board, old, new, x, y-1)
-        if x < len(board) and board[x+1][y] != '#':
+        if x < len(board)-1 and board[x+1][y] != '#':
             flood_fill(board, old, new, x+1, y)
 
 
@@ -54,7 +54,7 @@ board1 = make_board([
     "....##############....",
 ])
 
-flood_fill(board1, old=".", new="~", x=5, y=12)
+flood_fill(board1, old=".", new="~", x=1, y=1)
 print_board(board1)
 
 
